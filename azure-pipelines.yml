@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-AzureTesting
+ AzureTesting
 
 steps:
 - script: echo Hello, world!
