@@ -23,4 +23,4 @@ steps:
     processName: 'Azure_UiPath_Demo'
     folderName: 'Modren Example'
     jobType: 'TestAutomation'
-    machine: 'DESKTOP-DKPHE2O'
+    user: 'uipath\balamanikanta.krishn'
