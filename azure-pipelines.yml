@@ -19,7 +19,7 @@ steps:
   displayName: 'Run a multi-line script'
 - task: UiPathRunJob@2
   inputs:
-    orchestratorConnection: 'UiPath_Testing'
+    orchestratorConnection: 'Uipath_Testing'
     processName: 'Azure_UiPath_Demo'
     folderName: 'Modren Example'
     jobType: 'TestAutomation'
