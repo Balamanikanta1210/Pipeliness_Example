@@ -22,5 +22,4 @@ steps:
     orchestratorConnection: 'Uipath_Testing'
     processName: 'Azure_UiPath_Demo'
     folderName: 'Modren Example'
-    jobType: 'TestAutomation'
     user: 'uipath\balamanikanta.krishn'
