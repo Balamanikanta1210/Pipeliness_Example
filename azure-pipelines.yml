@@ -17,17 +17,17 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-- task: UiPathRunJob@2
-  inputs:
-    orchestratorConnection: 'Uipath_Testing'
-    processName: 'Azure_UiPath_Demo'
-    folderName: 'Modren Example'
-    user: 'uipath\balamanikanta.krishn'
-- task: UiPathTest@2
-  inputs:
-    testTarget: 'TestProject'
-    orchestratorConnection: 'UiPath_Testing'
-    folderName: 'Modren Example'
+#- task: UiPathRunJob@2
+#  inputs:
+#    orchestratorConnection: 'Uipath_Testing'
+#    processName: 'Azure_UiPath_Demo'
+#    folderName: 'Modren Example'
+#    user: 'uipath\balamanikanta.krishn'
+#- task: UiPathTest@2
+#  inputs:
+#    testTarget: 'TestProject'
+#    orchestratorConnection: 'UiPath_Testing'
+#    folderName: 'Modren Example'
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
@@ -40,3 +40,9 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+- task: UiPathDeploy@2
+  inputs:
+    orchestratorConnection: 'UiPath_Testing'
+    packagesPath: '$(System.DefaultWorkingDirectory)/_Balamanikanta1210.Pipeliness_Example/drop/Output'
+    folderName: 'Modren Example'
+    entryPoints: 'Main.xaml'
