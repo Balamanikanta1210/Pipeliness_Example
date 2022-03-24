@@ -43,6 +43,6 @@ steps:
 - task: UiPathDeploy@2
   inputs:
     orchestratorConnection: 'UiPath_Testing'
-    packagesPath: '$(System.DefaultWorkingDirectory)/_Balamanikanta1210.Pipeliness_Example/drop/Output'
+    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
     folderName: 'Modren Example'
     entryPoints: 'Main.xaml'
