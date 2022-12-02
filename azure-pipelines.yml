@@ -29,6 +29,11 @@ steps:
 #    testTarget: 'TestProject'
 #    orchestratorConnection: 'UiPath_Testing'
 #    folderName: 'Modren Example'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: 'test.csv'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\Output'
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
