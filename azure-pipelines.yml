@@ -29,11 +29,6 @@ steps:
 #    testTarget: 'TestProject'
 #    orchestratorConnection: 'UiPath_Testing'
 #    folderName: 'Modren Example'
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: 'test.csv'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\Output'
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
@@ -41,14 +36,19 @@ steps:
     outputType: 'Process'
     orchestratorConnection: 'UiPath_Testing'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
 - task: UiPathDeploy@2
   inputs:
     orchestratorConnection: 'UiPath_Testing'
     packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
     folderName: 'Modren Example'
     entryPoints: 'Main.xaml'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: 'test.csv'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\Output'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
