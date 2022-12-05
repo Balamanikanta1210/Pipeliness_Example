@@ -47,8 +47,3 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: 'test.csv'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\Output'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
