@@ -40,7 +40,7 @@ steps:
   inputs:
     orchestratorConnection: 'UiPath_Testing'
     packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
-    folderName: 'Modren Example'
+    folderName: 'FS & T'
     entryPoints: 'Main.xaml'
 - task: CopyFiles@2
   inputs:
