@@ -36,3 +36,8 @@ steps:
     outputType: 'Process'
     orchestratorConnection: 'UiPath_Testing'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
