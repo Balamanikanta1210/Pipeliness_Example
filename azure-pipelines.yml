@@ -36,19 +36,3 @@ steps:
     outputType: 'Process'
     orchestratorConnection: 'UiPath_Testing'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-- task: UiPathDeploy@2
-  inputs:
-    orchestratorConnection: 'UiPath_Testing'
-    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
-    folderName: 'FS & T'
-    entryPoints: 'Main.xaml'
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: 'test.csv'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\Output'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
