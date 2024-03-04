@@ -1,7 +1,8 @@
 {
   "name": "UiPathAzureDevOps",
+  "projectId": "2a258166-dab9-4884-bbd0-3dc80ad24e1c",
   "description": "Publish Packages to orchestrators with Azure DevOps",
-  "main": "Main.xaml",
+  "main": "Test.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.10.4]",
     "UiPath.System.Activities": "[21.4.1]",
@@ -15,10 +16,12 @@
   "projectVersion": "1.0.96654982",
   "runtimeOptions": {
     "autoDispose": false,
+    "netFrameworkLazyLoading": false,
     "isPausable": true,
     "isAttended": false,
     "requiresUserInteraction": true,
     "supportsPersistence": false,
+    "workflowSerialization": "DataContract",
     "excludedLoggedData": [
       "Private:*",
       "*password*"
@@ -26,7 +29,8 @@
     "executionType": "Workflow",
     "readyForPiP": false,
     "startsInPiP": false,
-    "mustRestoreAllDependencies": false
+    "mustRestoreAllDependencies": false,
+    "pipType": "ChildSession"
   },
   "designOptions": {
     "projectProfile": "Developement",
@@ -42,16 +46,18 @@
       {
         "editingStatus": "Publishable",
         "testCaseId": "0cfc1331-4bce-41dd-be70-6e416508755a",
+        "testCaseType": "TestCase",
         "fileName": "TestCase.xaml"
       }
     ],
-    "modernBehavior": false
+    "modernBehavior": false,
+    "saveToCloud": false
   },
   "expressionLanguage": "VisualBasic",
   "entryPoints": [
     {
-      "filePath": "Main.xaml",
-      "uniqueId": "ee55f915-89a9-4f2f-a8be-b70d2e26fe79",
+      "filePath": "Test.xaml",
+      "uniqueId": "42fd57b2-6720-4a93-af45-31f3c3539cfd",
       "input": [],
       "output": []
     }
