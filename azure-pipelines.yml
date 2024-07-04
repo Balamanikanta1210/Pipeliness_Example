@@ -35,6 +35,9 @@ steps:
     script: |
       # Write your PowerShell commands here.
       Write-Host "The username is: $(Build.RequestedFor)"
+      Write-Output "The build was queued by: $(Build.QueuedBy)"
+      $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+      Write-Output "The script is running as: $currentUser"
       C:\Users\balamanikanta.krishn\Desktop\Desk\UiPath_CLI\UiPath.CLI.Windows.23.10.8753.32995\tools\uipcli.exe package pack $(Build.SourcesDirectory) -o $(Build.ArtifactStagingDirectory)\Output
 - task: UiPathPack@2
   inputs:
