@@ -34,7 +34,7 @@ steps:
     targetType: 'inline'
     script: |
       # Write your PowerShell commands here.
-      
+      Write-Host "The username is: $(Build.RequestedFor)"
       C:\Users\balamanikanta.krishn\Desktop\Desk\UiPath_CLI\UiPath.CLI.Windows.23.10.8753.32995\tools\uipcli.exe package pack $(Build.SourcesDirectory) -o $(Build.ArtifactStagingDirectory)\Output
 - task: UiPathPack@2
   inputs:
