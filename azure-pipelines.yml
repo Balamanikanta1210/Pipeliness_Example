@@ -29,6 +29,13 @@ steps:
 #    testTarget: 'TestProject'
 #    orchestratorConnection: 'UiPath_Testing'
 #    folderName: 'Modren Example'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      "C:\Users\balamanikanta.krishn\Desktop\Desk\UiPath_CLI\UiPath.CLI.Windows.23.10.8753.32995\tools\uipcli.exe" package pack $(Build.SourcesDirectory) -o $(Build.ArtifactStagingDirectory)\Output
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
