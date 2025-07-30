@@ -1,53 +1,38 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+  branches:
+    include:
+      - main
 
 pool:
- Default
+  vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  DOCKER_TAG: 'latest'  # <-- Replace with actual tag if needed
+  DOCKER_IMAGE: 'uipathprod.azurecr.io/robot/uiautomation-runtime:latest24.10'
+  LICENSE_AGREEMENT: 'accept'
+  ORCHESTRATOR_URL: 'https://cloud.uipath.com/walmazwnmqbk/DefaultTenant/orchestrator_'
+  MACHINE_KEY: '2f331945-11ab-4c20-8d73-cf366516f9d4'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-- task: UiPathInstallPlatform@2
-#- task: UiPathRunJob@2
-#  inputs:
-#    orchestratorConnection: 'Uipath_Testing'
-#    processName: 'Azure_UiPath_Demo'
-#    folderName: 'Modren Example'
-#    user: 'uipath\balamanikanta.krishn'
-#- task: UiPathTest@2
-#  inputs:
-#    testTarget: 'TestProject'
-#    orchestratorConnection: 'UiPath_Testing'
-#    folderName: 'Modren Example'
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your PowerShell commands here.
-      Write-Host "The username is: $(Build.RequestedFor)"
-      Write-Output "The build was queued by: $(Build.QueuedBy)"
-      $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-      Write-Output "The script is running as: $currentUser"
-      C:\Users\balamanikanta.krishn\Desktop\Desk\UiPath_CLI\UiPath.CLI.Windows.23.10.8753.32995\tools\uipcli.exe package pack $(Build.SourcesDirectory) -o $(Build.ArtifactStagingDirectory)\Output
-- task: UiPathPack@2
-  inputs:
-    versionType: 'AutoVersion'
-    projectJsonPath: '$(Build.SourcesDirectory)'
-    outputType: 'Process'
-    orchestratorConnection: 'UiPath_Testing'
-    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+stages:
+  - stage: Run_UiPath_Robot
+    jobs:
+      - job: RunOnLinux
+        steps:
+          - script: |
+              echo "Pulling Docker image: $(DOCKER_IMAGE)"
+              docker pull $(DOCKER_IMAGE)
+            displayName: 'Docker Pull'
+
+          - script: |
+              echo "Running UiPath robot container"
+              docker run -e LICENSE_AGREEMENT=$(LICENSE_AGREEMENT) \
+                         -e ORCHESTRATOR_URL=$(ORCHESTRATOR_URL) \
+                         -e MACHINE_KEY=$(MACHINE_KEY) \
+                         -tid $(DOCKER_IMAGE)
+            displayName: 'Docker Run UiPath Robot'
+          - task: UiPathTest@5
+            inputs:
+              testTarget: 'TestSet'
+              orchestratorConnection: 'UiPath_Testing'
+              testSet: 'LinuxTestset'
+              folderName: 'Test'
